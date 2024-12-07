@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+    <!-- Home -->
+     <title>Task Master</title>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+
+        <h1>Tasks Master</h1>
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>{{ task.date_created.date()}}</td>
+                <td>
+                    <a href="/update/{{task.id}}">Update</a>
+                    <br>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/complete/{{task.id}}">Complete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <form action="/" method="post">
+            <input type="text" name="content" id="content" placeholder="Task">
+            <button type="submit">Add Task</button>
+        </form>
+
+        <div>
+            <a href="/complete">Completed Tasks</a>
+        </div>
+    </div>
+{% endblock %}
